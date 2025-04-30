@@ -1,0 +1,34 @@
+{
+  "name": "useless-dice-clock",
+  "version": "1.0.0",
+  "description": "An interactive useless clock visualization using dice and p5.js",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "p5js",
+    "creative-coding",
+    "clock",
+    "visualization",
+    "dice",
+    "useless-clock"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/useless-dice-clock.git"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+} 

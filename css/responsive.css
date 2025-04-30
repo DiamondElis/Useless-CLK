@@ -1,0 +1,303 @@
+/* responsive.css - Responsive designs for Useless Dice Clock */
+
+/* ====== Media Queries ====== */
+
+/* Medium Screens (Tablets) */
+@media screen and (max-width: 1024px) {
+  :root {
+    --fs-headline: clamp(1.8rem, 4vw, 3.5rem);
+    --fs-subheading: clamp(1.3rem, 2.5vw, 2rem);
+    --space-xl: 3rem;
+  }
+  
+  .section-wrapper {
+    padding: var(--space-xl) var(--space-md);
+  }
+  
+  .content-columns {
+    gap: var(--space-lg);
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .technical-breakdown {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .dice-container {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Small Screens (Mobile Landscape) */
+@media screen and (max-width: 768px) {
+  :root {
+    --fs-headline: clamp(1.5rem, 3.5vw, 3rem);
+    --fs-subheading: clamp(1.2rem, 2vw, 1.8rem);
+    --fs-body: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+  }
+  
+  .site-header {
+    padding: var(--space-sm) var(--space-md);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+  
+  .main-nav ul {
+    gap: var(--space-md);
+  }
+  
+  .hero-section {
+    height: auto;
+    min-height: 100vh;
+    padding-top: 100px;
+  }
+  
+  .hero-content {
+    padding: var(--space-md);
+  }
+  
+  .content-columns {
+    flex-direction: column;
+  }
+  
+  .image-column {
+    order: -1;
+  }
+  
+  .technical-breakdown {
+    grid-template-columns: 1fr;
+  }
+  
+  .sources-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .clock-face {
+    width: min(90vw, 400px);
+    height: min(90vw, 400px);
+  }
+  
+  .dice-container {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Extra Small Screens (Mobile Portrait) */
+@media screen and (max-width: 480px) {
+  :root {
+    --fs-headline: clamp(1.3rem, 3vw, 2.5rem);
+    --fs-subheading: 1.2rem;
+    --fs-body: 0.95rem;
+    --space-md: 0.75rem;
+    --space-lg: 1.25rem;
+    --space-xl: 2rem;
+  }
+  
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm) var(--space-md);
+  }
+  
+  .main-nav a {
+    font-size: 0.9rem;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cta-button {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: 1rem;
+  }
+  
+  .clock-face {
+    width: min(90vw, 300px);
+    height: min(90vw, 300px);
+  }
+  
+  .dice-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .loading-watch {
+    width: 120px;
+    height: 150px;
+  }
+  
+  .loading-dice {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .loading-text {
+    font-size: 1.2rem;
+  }
+}
+
+/* Height-based Adjustments */
+@media screen and (max-height: 600px) and (min-width: 481px) {
+  .hero-section {
+    padding-top: 80px;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .hero-content {
+    padding: var(--space-sm);
+  }
+  
+  .clock-face {
+    transform: scale(0.8);
+    margin-bottom: var(--space-md);
+  }
+}
+
+/* Landscape Mode Optimization */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    flex-direction: row;
+    height: auto;
+    min-height: 100vh;
+    padding: var(--space-lg);
+  }
+  
+  .hero-content {
+    width: 50%;
+    text-align: left;
+    padding-right: var(--space-xl);
+  }
+  
+  #clock-container {
+    position: relative;
+    width: 50%;
+    height: 100%;
+  }
+  
+  .clock-face {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+/* High Resolution Screens */
+@media screen and (min-width: 1600px) {
+  :root {
+    --fs-headline: 5rem;
+    --fs-subheading: 3rem;
+    --fs-body: 1.3rem;
+  }
+  
+  .section-wrapper {
+    max-width: 1400px;
+    padding: calc(var(--space-xl) * 1.5) var(--space-xl);
+  }
+  
+  .clock-face {
+    width: 700px;
+    height: 700px;
+  }
+  
+  .dice-container {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .site-header, .hero-section, .cta-button, .site-footer {
+    display: none;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+  
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  
+  .content-section {
+    padding: 1cm 0;
+    page-break-inside: avoid;
+  }
+  
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  img, .gallery-image, .clock-face {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-cream: #1A1A1A;
+    --color-cream-dark: #121212;
+    --color-black: #F5F1E6;
+  }
+  
+  .dark-section {
+    background-color: #0A0A0A;
+  }
+  
+  .gallery-item {
+    background-color: #252525;
+  }
+  
+  .breakdown-item {
+    background-color: rgba(230, 201, 146, 0.1);
+  }
+  
+  .technical-details {
+    background-color: rgba(245, 241, 230, 0.05);
+  }
+  
+  .scrolled .site-header {
+    background-color: rgba(26, 26, 26, 0.95);
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animated-bg::before, 
+  .hero-section::before,
+  .loading-watch,
+  .loading-dice,
+  .gold-shimmer::after {
+    animation: none !important;
+  }
+} 

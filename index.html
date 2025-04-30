@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useless Dice Clock | A Creative Timekeeping Experience</title>
+    <meta name="description" content="Experience time in a new way with this interactive useless clock inspired by luxury dice watches.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico">
+    
+    <!-- Font Imports -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Hina+Mincho&display=swap" rel="stylesheet">
+    
+    <!-- Custom Fonts -->
+    <style>
+        @font-face {
+            font-family: 'Craft Mincho';
+            src: url('assets/fonts/CraftMincho.woff2') format('woff2'),
+                 url('assets/fonts/CraftMincho.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    
+    <!-- CSS Imports -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- p5.js Libraries -->
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/p5.sound.min.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-watch">
+                <div class="loading-dice"></div>
+            </div>
+            <p class="loading-text">Time is loading...</p>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Header Section -->
+        <header class="site-header">
+            <div class="logo">Useless Dice Clock</div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#sources">Sources</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1>TIME IS AN ILLUSION</h1>
+                <p class="subtitle">Reimagine how you experience time with our useless dice clock</p>
+                <button id="roll-dice-btn" class="cta-button">ROLL THE DICE</button>
+            </div>
+            <!-- p5.js Canvas Container -->
+            <div id="clock-container"></div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="content-section">
+            <div class="section-wrapper">
+                <h2>About the Useless Clock</h2>
+                <div class="content-columns">
+                    <div class="text-column">
+                        <p>What is a clock? What is its purpose? What data does it know? How does it share that data with you? How do you understand the data?</p>
+                        <p>A useless clock visualizes the current time, just like a regular clock... but not in a way that anyone readily understands. It is a way to question the notion that we track time by a clock, and reacquaint ourselves with a different perspective of time.</p>
+                        <p>This project reimagines timekeeping through the aesthetic of luxury dice watches, creating a beautiful but deliberately impractical way to visualize the passage of time.</p>
+                    </div>
+                    <div class="image-column">
+                        <div class="about-image"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="content-section dark-section">
+            <div class="section-wrapper">
+                <h2>How It Works</h2>
+                <div class="technical-breakdown">
+                    <div class="breakdown-item">
+                        <h3>Hours</h3>
+                        <p>Represented by the position and rotation of the dice in the container</p>
+                    </div>
+                    <div class="breakdown-item">
+                        <h3>Minutes</h3>
+                        <p>Shown through the sum of the visible dice values</p>
+                    </div>
+                    <div class="breakdown-item">
+                        <h3>Seconds</h3>
+                        <p>Visualized by subtle animations and background pattern shifts</p>
+                    </div>
+                </div>
+                <div class="technical-details">
+                    <div class="code-preview">
+                        <pre><code>// Time mapping example
+function mapTimeToVisualization(h, m, s) {
+  // Hours affect dice position
+  // Minutes affect dice values
+  // Seconds affect animation speed
+}
+</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gallery Section -->
+        <section id="gallery" class="content-section">
+            <div class="section-wrapper">
+                <h2>Visualization Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-mode="standard">
+                        <div class="gallery-image"></div>
+                        <h3>Standard Mode</h3>
+                        <p>The default visualization style</p>
+                    </div>
+                    <div class="gallery-item" data-mode="binary">
+                        <div class="gallery-image"></div>
+                        <h3>Binary Mode</h3>
+                        <p>Time represented in binary through dice patterns</p>
+                    </div>
+                    <div class="gallery-item" data-mode="abstract">
+                        <div class="gallery-image"></div>
+                        <h3>Abstract Mode</h3>
+                        <p>A more artistic interpretation of time</p>
+                    </div>
+                    <div class="gallery-item" data-mode="chaotic">
+                        <div class="gallery-image"></div>
+                        <h3>Chaotic Mode</h3>
+                        <p>Randomized elements influenced by time</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sources Section -->
+        <section id="sources" class="content-section dark-section">
+            <div class="section-wrapper">
+                <h2>Sources & Inspiration</h2>
+                <div class="sources-list">
+                    <div class="source-item">
+                        <h3>Dice Watch Design</h3>
+                        <p>Inspired by the <a href="https://number11-dinks.myshopify.com/en/products/fm12-gdgd" target="_blank">FM12-GDGD dice watch</a></p>
+                    </div>
+                    <div class="source-item">
+                        <h3>Typography</h3>
+                        <ul>
+                            <li><a href="https://www.freejapanesefont.com/craft-mincho-free-download/" target="_blank">Craft Mincho</a> - A hand-crafted Mincho typeface</li>
+                            <li><a href="https://fonts.google.com/specimen/Shippori+Mincho" target="_blank">Shippori Mincho</a> - An old-style Mincho typeface</li>
+                            <li><a href="https://fonts.google.com/specimen/Hina+Mincho" target="_blank">Hina Mincho</a> - An old-fashioned Japanese font</li>
+                        </ul>
+                    </div>
+                    <div class="source-item">
+                        <h3>Technical Resources</h3>
+                        <ul>
+                            <li><a href="https://p5js.org/" target="_blank">p5.js</a> - Creative coding library</li>
+                            <li><a href="https://github.com/username/useless-dice-clock" target="_blank">Project Repository</a> - Source code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>Created for Creative Coding course assignment</p>
+            <p>&copy; 2025 Useless Dice Clock | <a href="https://github.com/username/useless-dice-clock" target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript Imports -->
+    <script src="js/utils.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/dice.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

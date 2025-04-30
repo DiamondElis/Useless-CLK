@@ -1,0 +1,314 @@
+/* animations.css - Animation definitions for Useless Dice Clock */
+
+/* ====== Keyframe Animations ====== */
+
+/* Pulse animation for subtle breathing effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* Spin animation for rotating elements */
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Bounce animation for dice */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Float animation for hovering elements */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Wave pattern animation for background */
+@keyframes wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide in from left animation */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Slide in from right animation */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Shimmer animation for gold elements */
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ====== Applied Animations ====== */
+
+/* Hero Section Animations */
+.hero-section h1 {
+  animation: fadeIn 1.2s ease forwards, slideUp 1.2s ease forwards;
+}
+
+.hero-section .subtitle {
+  animation: fadeIn 1.2s ease 0.3s forwards, slideUp 1.2s ease 0.3s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.hero-section .cta-button {
+  animation: fadeIn 1.2s ease 0.6s forwards, slideUp 1.2s ease 0.6s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+/* Navigation Animation */
+.main-nav ul li {
+  opacity: 0;
+  animation: slideInRight 0.8s ease forwards;
+  animation-fill-mode: forwards;
+}
+
+.main-nav ul li:nth-child(1) { animation-delay: 0.1s; }
+.main-nav ul li:nth-child(2) { animation-delay: 0.2s; }
+.main-nav ul li:nth-child(3) { animation-delay: 0.3s; }
+.main-nav ul li:nth-child(4) { animation-delay: 0.4s; }
+.main-nav ul li:nth-child(5) { animation-delay: 0.5s; }
+
+/* Logo Animation */
+.logo {
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Section Entrance Animations */
+.content-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.content-section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gallery Item Animations */
+.gallery-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-grid.in-view .gallery-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-grid.in-view .gallery-item:nth-child(1) { transition-delay: 0.1s; }
+.gallery-grid.in-view .gallery-item:nth-child(2) { transition-delay: 0.2s; }
+.gallery-grid.in-view .gallery-item:nth-child(3) { transition-delay: 0.3s; }
+.gallery-grid.in-view .gallery-item:nth-child(4) { transition-delay: 0.4s; }
+
+/* Source Items Animation */
+.source-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.sources-list.in-view .source-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sources-list.in-view .source-item:nth-child(1) { transition-delay: 0.1s; }
+.sources-list.in-view .source-item:nth-child(2) { transition-delay: 0.2s; }
+.sources-list.in-view .source-item:nth-child(3) { transition-delay: 0.3s; }
+
+/* Loading Screen Animations */
+.loading-watch {
+  animation: pulse 1.5s infinite alternate;
+}
+
+.loading-dice {
+  animation: spin 3s infinite linear;
+}
+
+/* Background Pattern Animation */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, var(--color-gold-light) 0%, var(--color-gold) 25%, var(--color-gold-dark) 50%, var(--color-gold) 75%, var(--color-gold-light) 100%);
+  background-size: 200% 200%;
+  opacity: 0.1;
+  z-index: 1;
+  animation: wave 15s linear infinite;
+}
+
+/* Gold Shimmer Effect */
+.gold-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Animated Dice Rolling */
+.rolling-dice {
+  animation: bounce 1s ease;
+}
+
+/* Clock Hand Animation */
+.clock-hand {
+  transform-origin: bottom center;
+  transition: transform 0.5s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+}
+
+.clock-hand.smooth {
+  transition: transform 1s linear;
+}
+
+/* Animated Background for Sections */
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(230, 201, 146, 0.1) 0%, transparent 70%);
+  opacity: 0.5;
+  animation: pulse 10s infinite alternate;
+  z-index: -1;
+}
+
+/* Floating Elements Animation */
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Loading Animation for Elements */
+.loading-element {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-element::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+/* Special Effect for CTA Button */
+.cta-button:hover {
+  animation: pulse 1s infinite alternate;
+} 
