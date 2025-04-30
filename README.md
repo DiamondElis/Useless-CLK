@@ -199,35 +199,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 Assignment Context
-
-This project was created for a creative coding class assignment to develop a "useless clock" - a visualization that shows time in a non-traditional and purposefully impractical way. The goal was to question conventional time representation while implementing creative coding techniques with p5.js.
-
-## 📜 License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgements
+## 🙏 Acknowledgments
 
-- Inspired by the [FM12-GDGD dice watch](https://number11-dinks.myshopify.com/en/products/fm12-gdgd)
-- Thanks to [Creative Coding course] for the assignment prompt
-- p5.js community for examples and inspiration
-- Typography featuring:
-  - [Craft Mincho](https://www.freejapanesefont.com/craft-mincho-free-download/) - A hand-crafted Mincho typeface
-  - [Shippori Mincho](https://fonts.google.com/specimen/Shippori+Mincho) - An old-style Mincho typeface 
-  - [Hina Mincho](https://fonts.google.com/specimen/Hina+Mincho) - An old-fashioned Japanese font
-- [Additional credits for any resources used]
-
----
-
-Made with ❤️ and lots of coffee by [Your Name]
-
-```
-                    _______
-                   /       \
-                  /  O   O  \
-                 /     ∆     \
-                /  _________  \
-                \____________/
-                 USELESS CLOCK
-``` 
+- Inspired by the aesthetic of luxury dice watches
+- Built with [p5.js](https://p5js.org/)
+- Special thanks to the creative coding community
