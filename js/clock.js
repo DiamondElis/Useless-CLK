@@ -178,37 +178,45 @@ class ClockSystem {
   mapMinutesToDice() {
     if (typeof diceSystem === 'undefined') return;
     
-    // Get current hour (1-12)
-    const currentHour = this.hours === 0 ? 12 : this.hours;
+    // Get current hour (0-23)
+    const h = hour();
     
-    // If this is a new minute, trigger dice roll
-    if (this.minutes !== this.lastMinute) {
+    // If this is a new hour, trigger dice roll
+    if (h !== this.lastHour) {
+      this.lastHour = h;
+      
       // Trigger dice roll animation
       if (typeof diceSystem !== 'undefined') {
         diceSystem.roll();
-      }
-      
-      // Map the hour to dice values
-      if (typeof diceSystem !== 'undefined' && diceSystem.dice.length === 3) {
-        // We need to distribute the current hour (1-12) across 3 dice
-        // Each die can show 1-6, so the sum can range from 3-18
-        // We'll map 1-12 to 3-18 to ensure we can represent all hours
         
-        // Calculate target sum (map 1-12 to 3-18)
-        const targetSum = Math.floor(map(currentHour, 1, 12, 3, 19));
-        
-        // Distribute the sum across the dice
-        const diceValues = this.distributeSumAcrossDice(targetSum, 3);
-        
-        // Set dice values
-        diceSystem.dice[0].value = diceValues[0];
-        diceSystem.dice[1].value = diceValues[1];
-        diceSystem.dice[2].value = diceValues[2];
-        
-        // Set target rotations for each die
-        diceSystem.setDieRotationForValue(diceSystem.dice[0], diceValues[0]);
-        diceSystem.setDieRotationForValue(diceSystem.dice[1], diceValues[1]);
-        diceSystem.setDieRotationForValue(diceSystem.dice[2], diceValues[2]);
+        // After rolling, set the dice values to represent hour of day
+        setTimeout(() => {
+          // For 24-hour clock, we need to map 0-23 to three dice
+          
+          // First die: can represent values 0-5 (as dice show 1-6)
+          // This gives us the "tens" place of hours (0-2)
+          const firstDieValue = Math.floor(h / 10) + 1;
+          
+          // Second die: represents the "ones" place of hours (0-9)
+          // Map 0-9 to dice values 1-6 (wrapping around if needed)
+          const secondDieValue = (h % 10) % 6 + 1;
+          
+          // Third die: can be used to show AM/PM or just a visual indicator
+          // AM hours (0-11): show lower values (1-3)
+          // PM hours (12-23): show higher values (4-6)
+          const thirdDieValue = h < 12 ? Math.floor(random(1, 4)) : Math.floor(random(4, 7));
+          
+          // Set values and rotations for each die
+          if (diceSystem.dice.length === 3) {
+            diceSystem.dice[0].value = firstDieValue;
+            diceSystem.dice[1].value = secondDieValue;
+            diceSystem.dice[2].value = thirdDieValue;
+            
+            diceSystem.setDieRotationForValue(diceSystem.dice[0], firstDieValue);
+            diceSystem.setDieRotationForValue(diceSystem.dice[1], secondDieValue);
+            diceSystem.setDieRotationForValue(diceSystem.dice[2], thirdDieValue);
+          }
+        }, 500); // Wait for dice roll animation to start
       }
     }
   }

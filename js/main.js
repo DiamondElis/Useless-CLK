@@ -44,17 +44,27 @@ function setup() {
   textFont(craftMincho);
   textAlign(CENTER, CENTER);
   
-  // Initialize dice positions
+  // Explicitly set dice system properties
+  diceSystem.diceCount = 3;
+  diceSystem.containerSize = 100; // Increased size for 3 dice
   diceSystem.init();
   
-  // Hide loading screen after assets are loaded
+  // Initialize clock with current hour
+  clockSystem.lastHour = hour();
+  
+  // Force an initial dice roll to show current hour
+  setTimeout(() => {
+    clockSystem.mapMinutesToDice();
+  }, 1000);
+  
+  // Force hide loading screen after a timeout
   setTimeout(() => {
     document.getElementById('loading-screen').style.opacity = 0;
     setTimeout(() => {
       document.getElementById('loading-screen').style.display = 'none';
       isLoading = false;
     }, 500);
-  }, 2000);
+  }, 3000);
   
   // Add event listeners
   window.addEventListener('resize', onWindowResize);
@@ -74,6 +84,9 @@ function draw() {
   // Update time values
   clockSystem.update();
   
+  // Map time to hour of day
+  clockSystem.mapMinutesToDice();
+  
   // Get current time
   const h = hour();
   const m = minute();
@@ -87,10 +100,10 @@ function draw() {
   drawWatchFace(h, m, s, ms);
   
   // Draw dice representation of time
-  diceSystem.display(h, m, s, ms);
+  diceSystem.display();
   
   // Update animations
-  animationSystem.update(ms);
+  animationSystem.update();
 }
 
 /**
@@ -298,6 +311,7 @@ class ClockSystem {
     this.secondAngle = 0;
     this.prevSecond = -1;
     this.tickSound = null;
+    this.lastHour = 0;
   }
   
   /**
@@ -341,6 +355,24 @@ class ClockSystem {
       second: second(),
       millis: millis()
     };
+  }
+  
+  /**
+   * Map minutes to dice values
+   */
+  mapMinutesToDice() {
+    const h = hour() % 12;
+    const m = minute();
+    const s = second();
+    const ms = millis();
+    
+    // Map minutes to dice values
+    const minuteDice = Math.floor(m / 15);
+    const secondDice = Math.floor(s / 15);
+    const millisDice = Math.floor(ms / 100);
+    
+    // Update dice system
+    diceSystem.updateDiceValues(h, m, s, ms);
   }
 }
 
@@ -524,7 +556,7 @@ class DiceSystem {
   /**
    * Display dice in 3D space
    */
-  display(h, m, s, ms) {
+  display() {
     // Update dice physics
     const currentTime = millis();
     const deltaTime = currentTime - this.lastUpdateTime;
@@ -631,6 +663,13 @@ class DiceSystem {
     ellipse(-dotOffset/2, 0, dotSize);
     pop();
   }
+  
+  /**
+   * Update dice values
+   */
+  updateDiceValues(h, m, s, ms) {
+    // Implementation of updating dice values based on the new time
+  }
 }
 
 // ------------------------------------------
@@ -710,11 +749,11 @@ class AnimationSystem {
   /**
    * Update active animations
    */
-  update(currentTime) {
+  update() {
     // Update active effects
     for (let i = this.activeEffects.length - 1; i >= 0; i--) {
       const effect = this.activeEffects[i];
-      const elapsedTime = currentTime - effect.startTime;
+      const elapsedTime = millis() - effect.startTime;
       const progress = constrain(elapsedTime / effect.effect.duration, 0, 1);
       
       // Remove completed effects
@@ -723,7 +762,7 @@ class AnimationSystem {
       }
     }
     
-    this.lastTime = currentTime;
+    this.lastTime = millis();
   }
   
   /**
