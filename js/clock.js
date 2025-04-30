@@ -178,24 +178,41 @@ class ClockSystem {
   mapMinutesToDice() {
     if (typeof diceSystem === 'undefined') return;
     
-    // Convert minutes (0-59) to dice values (1-6 on each die)
-    // We have 3 dice, so the sum can range from 3 to 18
+    // Calculate minutes of day (0-1439)
+    const minutesOfDay = this.hours * 60 + this.minutes;
     
-    // To map 0-59 minutes to 3-18 sum:
-    // We'll divide into roughly equal segments
-    // 0-3 minutes: sum = 3
-    // 4-7 minutes: sum = 4
-    // ...
-    // 56-59 minutes: sum = 18
-    
-    // Calculate target sum
-    const targetSum = Math.floor(map(this.minutes, 0, 60, 3, 19));
-    
-    // Now we need to distribute this sum across 3 dice
-    const diceValues = this.distributeSumAcrossDice(targetSum, 3);
-    
-    // Return the values for dice system to use
-    return diceValues;
+    // If this is a new minute, trigger dice roll
+    if (this.minutes !== this.lastMinute) {
+      // Trigger dice roll animation
+      if (typeof diceSystem !== 'undefined') {
+        diceSystem.roll();
+      }
+      
+      // Map the minute of day to dice values
+      if (typeof diceSystem !== 'undefined' && diceSystem.dice.length === 3) {
+        // For 3 dice (values 1-6 each), we need to represent 0-1439 minutes
+        // We can use a modular approach
+        
+        // First die: represents hundreds place (0-14 mapped to repeating 1-6)
+        const firstDieValue = (Math.floor(minutesOfDay / 100) % 6) + 1;
+        
+        // Second die: represents tens place (0-9 mapped to repeating 1-6)
+        const secondDieValue = (Math.floor((minutesOfDay % 100) / 10) % 6) + 1;
+        
+        // Third die: represents ones place (0-9 mapped to repeating 1-6)
+        const thirdDieValue = ((minutesOfDay % 10) % 6) + 1;
+        
+        // Set dice values
+        diceSystem.dice[0].value = firstDieValue;
+        diceSystem.dice[1].value = secondDieValue;
+        diceSystem.dice[2].value = thirdDieValue;
+        
+        // Set target rotations for each die
+        diceSystem.setDieRotationForValue(diceSystem.dice[0], firstDieValue);
+        diceSystem.setDieRotationForValue(diceSystem.dice[1], secondDieValue);
+        diceSystem.setDieRotationForValue(diceSystem.dice[2], thirdDieValue);
+      }
+    }
   }
   
   /**

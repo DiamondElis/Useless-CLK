@@ -88,12 +88,8 @@ class DiceSystem {
         random(-0.2, 0.2)
       );
       
-      // Determine new random value for die
-      const newValue = floor(random(1, 7));
-      die.value = newValue;
-      
-      // Set target rotation to show correct face when die stops rolling
-      this.setDieRotationForValue(die, newValue);
+      // Note: We don't set new random values here anymore
+      // Values are set by the clock system
     }
   }
   
@@ -205,21 +201,16 @@ class DiceSystem {
         }
       } else {
         // If not rolling, gradually move toward final positions
+        // Calculate positions in a triangle formation
+        const angle = TWO_PI / 3 * i;
+        const radius = containerRadius * 0.4;
         
-        // Calculate hour-based positions
-        const hour = hour() % 12;
-        const angle = map(hour, 0, 12, 0, TWO_PI) - HALF_PI;
-        const targetX = cos(angle) * (containerRadius * 0.6);
-        const targetY = sin(angle) * (containerRadius * 0.6);
-        
-        // Calculate offsets based on die index
-        const offsetAngle = TWO_PI / this.diceCount;
-        const dx = cos(angle + i * offsetAngle) * this.diceSize;
-        const dy = sin(angle + i * offsetAngle) * this.diceSize;
+        const targetX = cos(angle) * radius;
+        const targetY = sin(angle) * radius;
         
         // Smoothly interpolate to target position
-        die.x = lerp(die.x, targetX + dx, 0.05);
-        die.y = lerp(die.y, targetY + dy, 0.05);
+        die.x = lerp(die.x, targetX, 0.05);
+        die.y = lerp(die.y, targetY, 0.05);
         die.z = lerp(die.z, 0, 0.05);
         
         // Smoothly interpolate to target rotation
