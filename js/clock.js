@@ -172,14 +172,14 @@ class ClockSystem {
   }
   
   /**
-   * Map current minutes to dice values
-   * This defines how minutes are represented by dice values
+   * Map current hour to dice values
+   * This defines how the hour is represented by dice values
    */
   mapMinutesToDice() {
     if (typeof diceSystem === 'undefined') return;
     
-    // Calculate minutes of day (0-1439)
-    const minutesOfDay = this.hours * 60 + this.minutes;
+    // Get current hour (1-12)
+    const currentHour = this.hours === 0 ? 12 : this.hours;
     
     // If this is a new minute, trigger dice roll
     if (this.minutes !== this.lastMinute) {
@@ -188,29 +188,27 @@ class ClockSystem {
         diceSystem.roll();
       }
       
-      // Map the minute of day to dice values
+      // Map the hour to dice values
       if (typeof diceSystem !== 'undefined' && diceSystem.dice.length === 3) {
-        // For 3 dice (values 1-6 each), we need to represent 0-1439 minutes
-        // We can use a modular approach
+        // We need to distribute the current hour (1-12) across 3 dice
+        // Each die can show 1-6, so the sum can range from 3-18
+        // We'll map 1-12 to 3-18 to ensure we can represent all hours
         
-        // First die: represents hundreds place (0-14 mapped to repeating 1-6)
-        const firstDieValue = (Math.floor(minutesOfDay / 100) % 6) + 1;
+        // Calculate target sum (map 1-12 to 3-18)
+        const targetSum = Math.floor(map(currentHour, 1, 12, 3, 19));
         
-        // Second die: represents tens place (0-9 mapped to repeating 1-6)
-        const secondDieValue = (Math.floor((minutesOfDay % 100) / 10) % 6) + 1;
-        
-        // Third die: represents ones place (0-9 mapped to repeating 1-6)
-        const thirdDieValue = ((minutesOfDay % 10) % 6) + 1;
+        // Distribute the sum across the dice
+        const diceValues = this.distributeSumAcrossDice(targetSum, 3);
         
         // Set dice values
-        diceSystem.dice[0].value = firstDieValue;
-        diceSystem.dice[1].value = secondDieValue;
-        diceSystem.dice[2].value = thirdDieValue;
+        diceSystem.dice[0].value = diceValues[0];
+        diceSystem.dice[1].value = diceValues[1];
+        diceSystem.dice[2].value = diceValues[2];
         
         // Set target rotations for each die
-        diceSystem.setDieRotationForValue(diceSystem.dice[0], firstDieValue);
-        diceSystem.setDieRotationForValue(diceSystem.dice[1], secondDieValue);
-        diceSystem.setDieRotationForValue(diceSystem.dice[2], thirdDieValue);
+        diceSystem.setDieRotationForValue(diceSystem.dice[0], diceValues[0]);
+        diceSystem.setDieRotationForValue(diceSystem.dice[1], diceValues[1]);
+        diceSystem.setDieRotationForValue(diceSystem.dice[2], diceValues[2]);
       }
     }
   }

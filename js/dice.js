@@ -12,7 +12,7 @@ class DiceSystem {
     this.diceSize = 25;   // Size of each die
     
     // Container properties
-    this.containerSize = 80;  // Diameter of dice container
+    this.containerSize = 100;  // Increased container size for three dice
     this.containerColor = color(10, 77, 60); // Deep green
     
     // Animation states
@@ -200,8 +200,7 @@ class DiceSystem {
           this.isRolling = false;
         }
       } else {
-        // If not rolling, gradually move toward final positions
-        // Calculate positions in a triangle formation
+        // If not rolling, position dice in a triangle formation
         const angle = TWO_PI / 3 * i;
         const radius = containerRadius * 0.4;
         
